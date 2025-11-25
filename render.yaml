@@ -1,3 +1,4 @@
+
 services:
   - type: web
     name: halal-stocks-api
@@ -9,12 +10,13 @@ services:
       - key: NODE_ENV
         value: production
       - key: FINNHUB_API_KEY
-        value: "<YOUR_FINNHUB_API_KEY>"
+        value: "d4ivv2hr01queuakrd5gdv2hr01queuakrd60"
       - key: MONGODB_URI
-        value: "<YOUR_MONGODB_CONNECTION_STRING>"
+        value: "mongodb+srv://mfmqazi_db_user:3nbRpCxvJQS9SMK0@cluster0.17odlwh.mongodb.net/halal-stocks?retryWrites=true&w=majority"
       - key: JWT_SECRET
-        value: "<YOUR_JWT_SECRET>"
+        value: "halal_stocks_super_secret_jwt_key_2025_change_in_production"
       - key: RATE_LIMIT_WINDOW_MS
         value: "900000"
       - key: RATE_LIMIT_MAX_REQUESTS
         value: "100"
+
