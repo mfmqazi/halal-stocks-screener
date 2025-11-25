@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halal Stocks - Shariah Compliant Stock Screener</title>
+    <meta name="description" content="Screen stocks for Shariah compliance and ethical investing. Discover the top 100 halal stocks daily, excluding companies supporting genocide in Palestine.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="logo-text">Halal Stocks</span>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#screener" class="nav-link">Screener</a>
+                    <a href="#top-stocks" class="nav-link">Top 100</a>
+                    <a href="#criteria" class="nav-link">Criteria</a>
+                    <a href="#about" class="nav-link">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Invest with <span class="gradient-text">Faith & Ethics</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Screen stocks for Shariah compliance and ethical standards. Discover halal investment opportunities while supporting justice and avoiding companies complicit in oppression.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-stocks">2,847</div>
+                        <div class="stat-label">Stocks Analyzed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="compliant-stocks">1,234</div>
+                        <div class="stat-label">Shariah Compliant</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="ethical-stocks">892</div>
+                        <div class="stat-label">Ethically Screened</div>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <button class="btn btn-primary" onclick="scrollToSection('screener')">
+                        <span>Start Screening</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('top-stocks')">
+                        View Top 100
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Criteria Section -->
+    <section id="criteria" class="criteria-section">
+        <div class="container">
+            <h2 class="section-title">Screening Criteria</h2>
+            <p class="section-subtitle">Our comprehensive approach to Shariah-compliant and ethical investing</p>
+            
+            <div class="criteria-grid">
+                <div class="criteria-card">
+                    <div class="criteria-icon shariah">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M2 17L12 22L22 17M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="criteria-title">Shariah Compliance</h3>
+                    <ul class="criteria-list">
+                        <li>Interest-based income < 5%</li>
+                        <li>Total debt / market cap < 33%</li>
+                        <li>Liquid assets / market cap < 33%</li>
+                        <li>Accounts receivable / market cap < 49%</li>
+                        <li>No alcohol, gambling, pork, or tobacco</li>
+                        <li>No conventional banking or insurance</li>
+                    </ul>
+                </div>
+
+                <div class="criteria-card">
+                    <div class="criteria-icon ethical">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="criteria-title">Ethical Screening</h3>
+                    <ul class="criteria-list">
+                        <li>No support for Israeli occupation</li>
+                        <li>No weapons manufacturing for oppression</li>
+                        <li>No companies on BDS list</li>
+                        <li>Fair labor practices required</li>
+                        <li>Environmental responsibility</li>
+                        <li>Human rights compliance</li>
+                    </ul>
+                </div>
+
+                <div class="criteria-card">
+                    <div class="criteria-icon financial">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="criteria-title">Financial Health</h3>
+                    <ul class="criteria-list">
+                        <li>Positive earnings growth</li>
+                        <li>Strong balance sheet</li>
+                        <li>Consistent revenue streams</li>
+                        <li>Reasonable P/E ratios</li>
+                        <li>Market capitalization > $500M</li>
+                        <li>Average daily volume > 100K</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stock Screener Section -->
+    <section id="screener" class="screener-section">
+        <div class="container">
+            <h2 class="section-title">Stock Screener</h2>
+            <p class="section-subtitle">Search and analyze any stock for Shariah compliance and ethical standards</p>
+            
+            <div class="screener-container">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                        <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <input type="text" id="stock-search" class="search-input" placeholder="Enter stock symbol (e.g., AAPL, MSFT, TSLA)">
+                    <button class="btn btn-search" onclick="searchStock()">Screen Stock</button>
+                </div>
+
+                <div id="stock-result" class="stock-result hidden">
+                    <!-- Results will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top 100 Stocks Section -->
+    <section id="top-stocks" class="top-stocks-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Top 100 Halal Stocks</h2>
+                    <p class="section-subtitle">Updated daily • Last update: <span id="last-update">Today</span></p>
+                </div>
+                <div class="filter-controls">
+                    <select id="sector-filter" class="filter-select">
+                        <option value="all">All Sectors</option>
+                        <option value="technology">Technology</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="consumer">Consumer Goods</option>
+                        <option value="industrial">Industrial</option>
+                        <option value="energy">Energy</option>
+                    </select>
+                    <select id="sort-filter" class="filter-select">
+                        <option value="score">Highest Score</option>
+                        <option value="performance">Best Performance</option>
+                        <option value="market-cap">Market Cap</option>
+                        <option value="volume">Volume</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="stocks-table-container">
+                <table class="stocks-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Symbol</th>
+                            <th>Company</th>
+                            <th>Sector</th>
+                            <th>Price</th>
+                            <th>Change</th>
+                            <th>Market Cap</th>
+                            <th>Compliance Score</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stocks-table-body">
+                        <!-- Stocks will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <button class="pagination-btn" id="prev-page" onclick="changePage(-1)">Previous</button>
+                <div class="pagination-info">
+                    Page <span id="current-page">1</span> of <span id="total-pages">10</span>
+                </div>
+                <button class="pagination-btn" id="next-page" onclick="changePage(1)">Next</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Halal Stocks</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Halal Stocks is a comprehensive platform dedicated to helping Muslim investors make informed, Shariah-compliant investment decisions while maintaining strong ethical standards.</p>
+                    <p>We go beyond traditional Shariah screening by also filtering out companies that support oppression, particularly those complicit in the genocide in Palestine. Our ethical framework ensures your investments align with Islamic values and human rights principles.</p>
+                    <p>Our screening methodology is based on AAOIFI standards and incorporates additional ethical criteria developed in consultation with Islamic scholars and human rights organizations.</p>
+                </div>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Daily updated stock rankings</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Comprehensive Shariah screening</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Ethical investment criteria</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">BDS compliance checking</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Halal Stocks</h4>
+                    <p>Invest with faith and ethics</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#criteria">Screening Criteria</a>
+                    <a href="#about">About Us</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Disclaimer</h4>
+                    <p class="disclaimer">This platform provides information for educational purposes. Always consult with qualified Islamic scholars and financial advisors before making investment decisions.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Halal Stocks. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Stock Detail Modal -->
+    <div id="stock-modal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div id="modal-body">
+                <!-- Modal content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
