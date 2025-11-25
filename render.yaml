@@ -8,3 +8,13 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: FINNHUB_API_KEY
+        value: "<YOUR_FINNHUB_API_KEY>"
+      - key: MONGODB_URI
+        value: "<YOUR_MONGODB_CONNECTION_STRING>"
+      - key: JWT_SECRET
+        value: "<YOUR_JWT_SECRET>"
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "900000"
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: "100"
