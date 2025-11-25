@@ -5,6 +5,7 @@ import rateLimit from 'express-rate-limit';
 import stockRoutes from './routes/stocks.js';
 import authRoutes from './routes/auth.js';
 import watchlistRoutes from './routes/watchlist.js';
+import testRoutes from './routes/test.js';
 import { connectDB } from './config/database.js';
 import { startCronJobs } from './jobs/cronJobs.js';
 
@@ -15,8 +16,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB
-connectDB();
+// Connect to MongoDB (optional for testing)
+connectDB().catch(err => {
+    console.log('⚠️  Continuing without MongoDB. User features will be limited.');
+});
 
 // Middleware
 app.use(cors({
@@ -40,6 +43,7 @@ app.use('/api/', limiter);
 app.use('/api/stocks', stockRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/watchlist', watchlistRoutes);
+app.use('/api/test', testRoutes); // Test routes (no database required)
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

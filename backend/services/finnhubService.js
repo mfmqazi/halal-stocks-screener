@@ -1,4 +1,8 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const FINNHUB_BASE_URL = 'https://finnhub.io/api/v1';
 const API_KEY = process.env.FINNHUB_API_KEY;
@@ -27,6 +31,7 @@ class FinnhubService {
     // Get stock quote (price, change, etc.)
     async getQuote(symbol) {
         try {
+            console.log(`Requesting quote for ${symbol} with token: ${this.apiKey?.substring(0, 10)}...`);
             const response = await axios.get(`${this.baseURL}/quote`, {
                 params: {
                     symbol: symbol,
@@ -35,7 +40,7 @@ class FinnhubService {
             });
             return response.data;
         } catch (error) {
-            console.error(`Error fetching quote for ${symbol}:`, error.message);
+            console.error(`Error fetching quote for ${symbol}:`, error.response?.status, error.response?.data || error.message);
             return null;
         }
     }
@@ -51,7 +56,7 @@ class FinnhubService {
             });
             return response.data;
         } catch (error) {
-            console.error(`Error fetching profile for ${symbol}:`, error.message);
+            console.error(`Error fetching profile for ${symbol}:`, error.response?.status, error.response?.data || error.message);
             return null;
         }
     }
