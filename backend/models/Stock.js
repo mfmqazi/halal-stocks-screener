@@ -57,6 +57,10 @@ const stockSchema = new mongoose.Schema({
         default: 0
     },
     issues: [String],
+    isMock: {
+        type: Boolean,
+        default: false
+    },
     lastUpdated: {
         type: Date,
         default: Date.now
