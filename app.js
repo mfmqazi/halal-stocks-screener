@@ -1,3 +1,6 @@
+// API Configuration
+const API_BASE_URL = 'https://halal-stocks-screener-2.onrender.com/api';
+
 // Stock Data and Screening Logic
 
 // BDS List - Companies to exclude (supporting Israeli occupation/genocide)
@@ -1477,17 +1480,6 @@ let currentStocks = [];
 
 function displayStocks(page = 1) {
     const sector = document.getElementById('sector-filter').value;
-    const sortBy = document.getElementById('sort-filter').value;
-
-    currentStocks = getTop100Stocks(sector, sortBy);
-    const totalPages = Math.ceil(currentStocks.length / stocksPerPage);
-
-    const startIndex = (page - 1) * stocksPerPage;
-    const endIndex = startIndex + stocksPerPage;
-    const pageStocks = currentStocks.slice(startIndex, endIndex);
-
-    const tbody = document.getElementById('stocks-table-body');
-    tbody.innerHTML = '';
 
     pageStocks.forEach((stock, index) => {
         const rank = startIndex + index + 1;
