@@ -21,6 +21,9 @@ connectDB().catch(err => {
     console.log('⚠️  Continuing without MongoDB. User features will be limited.');
 });
 
+// Trust proxy - required for Render and other reverse proxies
+app.set('trust proxy', 1);
+
 // Middleware
 app.use(cors({
     origin: process.env.ALLOWED_ORIGINS?.split(',') || '*',
