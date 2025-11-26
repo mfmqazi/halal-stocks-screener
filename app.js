@@ -1,8 +1,6 @@
 // API Configuration
 const API_BASE_URL = 'https://halal-stocks-screener-2.onrender.com/api';
 
-// Stock Data and Screening Logic
-
 // BDS List - Companies to exclude (supporting Israeli occupation/genocide)
 const BDS_BLACKLIST = [
     'CAT', 'SBUX', 'MCD', 'PEP', 'KO', 'DIS', 'GOOGL', 'GOOG', 'AMZN',
@@ -16,42 +14,19 @@ const ETHICAL_BLACKLIST = [
     'BUD', 'TAP', 'STZ', // Alcohol
     'LVS', 'WYNN', 'MGM', 'CZR', // Gambling
     'JPM', 'BAC', 'C', 'WFC', 'GS', 'MS', // Conventional Banking
-    'AIG', 'PRU', 'MET', 'AFL', // Conventional Insurance
+    'AIG', 'PRU', 'MET', 'AFL' // Conventional Insurance
 ];
 
-// Comprehensive stock data with 100+ real companies (In production, this would come from a real-time API)
+// Utility to escape HTML to prevent injection/display of raw tags
+function escapeHTML(str) {
+    if (typeof str !== 'string') return str;
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+
 const STOCK_DATABASE = [
-    // Technology Sector
-    {
-        symbol: 'AAPL',
-        company: 'Apple Inc.',
-        sector: 'technology',
-        price: 178.45,
-        change: 2.34,
-        marketCap: '2.8T',
-        volume: '52.4M',
-        debtRatio: 0.28,
-        liquidAssetsRatio: 0.31,
-        receivablesRatio: 0.22,
-        interestIncome: 0.02,
-        prohibitedActivities: false,
-        complianceScore: 92
-    },
-    {
-        symbol: 'NVDA',
-        company: 'NVIDIA Corporation',
-        sector: 'technology',
-        price: 495.22,
-        change: 8.76,
-        marketCap: '1.2T',
-        volume: '45.2M',
-        debtRatio: 0.15,
-        liquidAssetsRatio: 0.28,
-        receivablesRatio: 0.18,
-        interestIncome: 0.01,
-        prohibitedActivities: false,
-        complianceScore: 95
-    },
     {
         symbol: 'AMD',
         company: 'Advanced Micro Devices',
@@ -1581,14 +1556,15 @@ async function searchStock() {
     }
 }
 
+
 function displayStockResult(stock) {
     const resultDiv = document.getElementById('stock-result');
     resultDiv.classList.remove('hidden');
 
     // Map backend response to expected format
     const result = {
-        symbol: stock.symbol,
-        company: stock.company,
+        symbol: escapeHTML(stock.symbol),
+        company: escapeHTML(stock.company),
         overallCompliant: stock.isCompliant,
         shariahCompliant: stock.isCompliant,
         complianceScore: stock.complianceScore,
@@ -1609,12 +1585,13 @@ function displayStockResult(stock) {
     const statusText = result.overallCompliant ? '✓ HALAL - Compliant' : '✗ NOT COMPLIANT';
 
     let issuesHTML = '';
+
     if (result.issues.length > 0) {
         issuesHTML = `
         < div style = "margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-lg);" >
                 <h4 style="color: var(--error); margin-bottom: var(--spacing-sm);">Compliance Issues:</h4>
                 <ul style="margin-left: var(--spacing-lg); color: var(--neutral-300);">
-                    ${result.issues.map(issue => `<li>${issue}</li>`).join('')}
+                    ${result.issues.map(issue => `<li>${escapeHTML(issue)}</li>`).join('')}
                 </ul>
             </div >
         `;
