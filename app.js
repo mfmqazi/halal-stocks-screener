@@ -1593,6 +1593,7 @@ function displayStockResult(stock) {
         shariahCompliant: stock.isCompliant,
         complianceScore: stock.complianceScore,
         issues: stock.issues || [],
+        isMock: stock.isMock,
         details: {
             price: stock.price,
             change: stock.change,
@@ -1622,10 +1623,12 @@ function displayStockResult(stock) {
     resultDiv.innerHTML = `
         < div style = "display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-lg);" >
             <div>
-                <h3 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: var(--spacing-sm);">
+                <h3 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: var(--spacing-sm); display: flex; align-items: center; gap: var(--spacing-sm);">
                     ${result.symbol}
+                    ${result.isMock ? '<span style="font-size: 0.75rem; background: var(--warning); color: black; padding: 2px 8px; border-radius: 4px; font-weight: bold;">DEMO DATA</span>' : ''}
                 </h3>
                 <p style="color: var(--neutral-400); font-size: 1.125rem;">${result.company}</p>
+                ${result.isMock ? '<p style="color: var(--warning); font-size: 0.875rem; margin-top: 4px;">⚠️ Backend API key missing. Showing demo data.</p>' : ''}
             </div>
             <div style="text-align: right;">
                 <div style="font-size: 1.5rem; font-weight: 700; color: ${statusColor}; margin-bottom: var(--spacing-sm);">
