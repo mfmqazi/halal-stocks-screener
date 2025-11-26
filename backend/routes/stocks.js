@@ -58,15 +58,24 @@ router.get('/:symbol', async (req, res) => {
     try {
         const { symbol } = req.params;
 
+        console.log(`📊 Fetching stock data for: ${symbol}`);
+
         // Try to get from database first
         let stock = await Stock.findOne({ symbol: symbol.toUpperCase() });
 
         // If not in database or outdated (> 1 hour), fetch from Finnhub
         if (!stock || (Date.now() - stock.lastUpdated > 3600000)) {
+            console.log(`🔄 Fetching fresh data from Finnhub for ${symbol}`);
+
             const stockData = await finnhubService.getStockData(symbol.toUpperCase());
 
             if (!stockData) {
-                return res.status(404).json({ error: 'Stock not found' });
+                console.error(`❌ Finnhub returned no data for ${symbol}`);
+                return res.status(404).json({
+                    error: 'Stock not found',
+                    message: `Unable to fetch data for symbol: ${symbol}. Please verify the symbol is correct.`,
+                    symbol: symbol.toUpperCase()
+                });
             }
 
             const screenedData = finnhubService.screenStock(stockData);
@@ -77,11 +86,20 @@ router.get('/:symbol', async (req, res) => {
                 { ...screenedData, lastUpdated: Date.now() },
                 { upsert: true, new: true }
             );
+
+            console.log(`✅ Successfully fetched and screened ${symbol}`);
+        } else {
+            console.log(`📦 Using cached data for ${symbol}`);
         }
 
         res.json(stock);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error(`💥 Error in /api/stocks/${req.params.symbol}:`, error.message);
+        res.status(500).json({
+            error: 'Internal server error',
+            message: error.message,
+            symbol: req.params.symbol
+        });
     }
 });
 

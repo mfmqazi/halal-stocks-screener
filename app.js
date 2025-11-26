@@ -1556,7 +1556,10 @@ async function searchStock() {
         const response = await fetch(`${API_BASE_URL}/stocks/${symbol}`);
 
         if (!response.ok) {
-            throw new Error(`Failed to fetch data for ${symbol}`);
+            // Try to get error message from response
+            const errorData = await response.json().catch(() => ({}));
+            const errorMessage = errorData.message || `Failed to fetch data for ${symbol}`;
+            throw new Error(errorMessage);
         }
 
         const result = await response.json();
@@ -1567,8 +1570,11 @@ async function searchStock() {
             <div style="text-align: center; padding: var(--spacing-xl); color: var(--error);">
                 <div style="font-size: 2rem; margin-bottom: var(--spacing-md);">❌</div>
                 <div style="font-size: 1.25rem; margin-bottom: var(--spacing-sm);">Unable to fetch data for ${symbol}</div>
-                <div style="color: var(--neutral-400); font-size: 0.875rem;">
-                    Please check the symbol and try again. Make sure you're entering a valid stock or ETF ticker.
+                <div style="color: var(--neutral-400); font-size: 0.875rem; margin-bottom: var(--spacing-md);">
+                    ${error.message}
+                </div>
+                <div style="color: var(--neutral-500); font-size: 0.75rem);">
+                    Tip: Make sure you're entering a valid stock or ETF ticker symbol (e.g., AAPL, TSLA, SPY)
                 </div>
             </div>
         `;
@@ -1604,17 +1610,17 @@ function displayStockResult(stock) {
     let issuesHTML = '';
     if (result.issues.length > 0) {
         issuesHTML = `
-            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-lg);">
+        < div style = "margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-lg);" >
                 <h4 style="color: var(--error); margin-bottom: var(--spacing-sm);">Compliance Issues:</h4>
                 <ul style="margin-left: var(--spacing-lg); color: var(--neutral-300);">
                     ${result.issues.map(issue => `<li>${issue}</li>`).join('')}
                 </ul>
-            </div>
+            </div >
         `;
     }
 
     resultDiv.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-lg);">
+        < div style = "display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-lg);" >
             <div>
                 <h3 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: var(--spacing-sm);">
                     ${result.symbol}
@@ -1627,7 +1633,7 @@ function displayStockResult(stock) {
                 </div>
                 <div style="color: var(--neutral-400);">Score: ${result.complianceScore}/100</div>
             </div>
-        </div>
+        </div >
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-lg);">
             <div>
@@ -1719,7 +1725,7 @@ function viewStockDetails(symbol) {
         const statusText = result.overallCompliant ? '✓ HALAL - Compliant' : '✗ NOT COMPLIANT';
 
         modalBody.innerHTML = `
-            <div style="margin-bottom: var(--spacing-xl);">
+        < div style = "margin-bottom: var(--spacing-xl);" >
                 <h2 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: var(--spacing-sm);">
                     ${result.symbol}
                 </h2>
@@ -1727,7 +1733,7 @@ function viewStockDetails(symbol) {
                 <div style="font-size: 1.5rem; font-weight: 700; color: ${statusColor};">
                     ${statusText}
                 </div>
-            </div>
+            </div >
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-xl);">
                 <div style="background: rgba(255, 255, 255, 0.05); padding: var(--spacing-lg); border-radius: var(--radius-lg);">
@@ -1850,7 +1856,7 @@ function viewStockDetails(symbol) {
                     </div>
                 </div>
             </div>
-        `;
+    `;
 
         modal.classList.remove('hidden');
     }
@@ -1946,7 +1952,7 @@ window.addEventListener('scroll', () => {
 
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
+        if (link.getAttribute('href') === `#${current} `) {
             link.classList.add('active');
         }
     });
