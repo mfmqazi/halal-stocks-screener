@@ -1532,44 +1532,71 @@ function changePage(direction) {
     }
 }
 
-function searchStock() {
+async function searchStock() {
     const searchInput = document.getElementById('stock-search');
     const symbol = searchInput.value.trim().toUpperCase();
 
     if (!symbol) {
-        alert('Please enter a stock symbol');
+        alert('Please enter a stock or ETF symbol');
         return;
     }
 
-    // Find stock in database
-    let stock = STOCK_DATABASE.find(s => s.symbol === symbol);
-
-    // If not found, create a mock stock for demonstration
-    if (!stock) {
-        stock = {
-            symbol: symbol,
-            company: `${symbol} Corporation`,
-            sector: 'technology',
-            price: Math.random() * 500 + 50,
-            change: (Math.random() - 0.5) * 10,
-            marketCap: `${Math.floor(Math.random() * 500)}B`,
-            volume: `${(Math.random() * 50).toFixed(1)}M`,
-            debtRatio: Math.random() * 0.4,
-            liquidAssetsRatio: Math.random() * 0.4,
-            receivablesRatio: Math.random() * 0.5,
-            interestIncome: Math.random() * 0.06,
-            prohibitedActivities: false,
-            complianceScore: Math.floor(Math.random() * 30) + 70
-        };
-    }
-
-    const result = screenStock(stock);
-    displayStockResult(result);
-}
-
-function displayStockResult(result) {
+    // Show loading state
     const resultDiv = document.getElementById('stock-result');
     resultDiv.classList.remove('hidden');
+    resultDiv.innerHTML = `
+        <div style="text-align: center; padding: var(--spacing-xl); color: var(--neutral-400);">
+            <div style="font-size: 2rem; margin-bottom: var(--spacing-md);">⏳</div>
+            <div>Analyzing ${symbol}...</div>
+        </div>
+    `;
+
+    try {
+        // Fetch stock data from backend API
+        const response = await fetch(`${API_BASE_URL}/stocks/${symbol}`);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data for ${symbol}`);
+        }
+
+        const result = await response.json();
+        displayStockResult(result);
+    } catch (error) {
+        console.error('Error fetching stock data:', error);
+        resultDiv.innerHTML = `
+            <div style="text-align: center; padding: var(--spacing-xl); color: var(--error);">
+                <div style="font-size: 2rem; margin-bottom: var(--spacing-md);">❌</div>
+                <div style="font-size: 1.25rem; margin-bottom: var(--spacing-sm);">Unable to fetch data for ${symbol}</div>
+                <div style="color: var(--neutral-400); font-size: 0.875rem;">
+                    Please check the symbol and try again. Make sure you're entering a valid stock or ETF ticker.
+                </div>
+            </div>
+        `;
+    }
+}
+
+function displayStockResult(stock) {
+    const resultDiv = document.getElementById('stock-result');
+    resultDiv.classList.remove('hidden');
+
+    // Map backend response to expected format
+    const result = {
+        symbol: stock.symbol,
+        company: stock.company,
+        overallCompliant: stock.isCompliant,
+        shariahCompliant: stock.isCompliant,
+        complianceScore: stock.complianceScore,
+        issues: stock.issues || [],
+        details: {
+            price: stock.price,
+            change: stock.change,
+            marketCap: stock.marketCap,
+            debtRatio: stock.debtRatio,
+            liquidAssetsRatio: stock.liquidAssetsRatio,
+            receivablesRatio: stock.receivablesRatio,
+            interestIncome: stock.interestIncome
+        }
+    };
 
     const statusColor = result.overallCompliant ? 'var(--success)' : 'var(--error)';
     const statusText = result.overallCompliant ? '✓ HALAL - Compliant' : '✗ NOT COMPLIANT';
@@ -1615,7 +1642,7 @@ function displayStockResult(result) {
             </div>
             <div>
                 <div style="color: var(--neutral-500); font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Market Cap</div>
-                <div style="font-size: 1.5rem; font-weight: 700;">$${result.details.marketCap}</div>
+                <div style="font-size: 1.5rem; font-weight: 700;">$${result.details.marketCap || 'N/A'}</div>
             </div>
         </div>
         
