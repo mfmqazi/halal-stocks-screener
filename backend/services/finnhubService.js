@@ -81,6 +81,12 @@ class FinnhubService {
     // Get comprehensive stock data
     async getStockData(symbol) {
         try {
+            // Check if API key is configured
+            if (!this.apiKey) {
+                console.warn('⚠️ Finnhub API key not configured. Using mock data.');
+                return this.getMockData(symbol);
+            }
+
             const [quote, profile, financials] = await Promise.all([
                 this.getQuote(symbol),
                 this.getCompanyProfile(symbol),
@@ -88,7 +94,8 @@ class FinnhubService {
             ]);
 
             if (!quote || !profile) {
-                return null;
+                console.warn(`⚠️ Failed to fetch data for ${symbol}. Using mock data.`);
+                return this.getMockData(symbol);
             }
 
             return {
@@ -109,8 +116,32 @@ class FinnhubService {
             };
         } catch (error) {
             console.error(`Error getting stock data for ${symbol}:`, error.message);
-            return null;
+            console.warn(`⚠️ Error occurred. Using mock data for ${symbol}.`);
+            return this.getMockData(symbol);
         }
+    }
+
+    // Generate mock data for demonstration/fallback
+    getMockData(symbol) {
+        const mockPrice = Math.random() * 500 + 50;
+        const mockChange = (Math.random() - 0.5) * 5;
+
+        return {
+            symbol: symbol,
+            company: `${symbol} Corporation (Demo Data)`,
+            sector: 'technology',
+            price: mockPrice,
+            change: mockChange,
+            marketCap: `${(Math.random() * 500 + 10).toFixed(1)}B`,
+            volume: `${(Math.random() * 10 + 1).toFixed(1)}M`,
+            debtRatio: Math.random() * 0.4,
+            liquidAssetsRatio: Math.random() * 0.4,
+            receivablesRatio: Math.random() * 0.5,
+            interestIncome: Math.random() * 0.06,
+            prohibitedActivities: false,
+            complianceScore: 0,
+            isMock: true
+        };
     }
 
     // Map Finnhub industry to our sectors
