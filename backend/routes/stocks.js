@@ -72,9 +72,10 @@ router.get('/:symbol', async (req, res) => {
             if (!stockData) {
                 console.error(`❌ Finnhub returned no data for ${symbol}`);
                 return res.status(404).json({
-                    error: 'Stock not found',
-                    message: `Unable to fetch data for symbol: ${symbol}. Please verify the symbol is correct.`,
-                    symbol: symbol.toUpperCase()
+                    error: 'Symbol not found',
+                    message: `Unable to fetch data for "${symbol}". This symbol may not be supported by Finnhub (e.g., mutual funds, some ETFs, or international stocks). Please try a different symbol or verify it's a valid US stock/ETF ticker.`,
+                    symbol: symbol.toUpperCase(),
+                    suggestion: 'Try searching for US-listed stocks like AAPL, TSLA, or ETFs like SPY, VOO'
                 });
             }
 

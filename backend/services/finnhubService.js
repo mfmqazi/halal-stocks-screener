@@ -94,8 +94,14 @@ class FinnhubService {
             ]);
 
             if (!quote || !profile) {
-                console.warn(`⚠️ Failed to fetch data for ${symbol}. Using mock data.`);
-                return this.getMockData(symbol);
+                console.warn(`⚠️ Symbol ${symbol} not found in Finnhub API.`);
+                return null;
+            }
+
+            // Check if we got valid data (not empty response)
+            if (!quote.c || !profile.name) {
+                console.warn(`⚠️ Invalid data returned for ${symbol}.`);
+                return null;
             }
 
             return {
@@ -116,8 +122,7 @@ class FinnhubService {
             };
         } catch (error) {
             console.error(`Error getting stock data for ${symbol}:`, error.message);
-            console.warn(`⚠️ Error occurred. Using mock data for ${symbol}.`);
-            return this.getMockData(symbol);
+            return null;
         }
     }
 
