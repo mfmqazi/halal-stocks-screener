@@ -1910,6 +1910,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize stocks table
     displayStocks(1);
 
+    // Initialize BDS Watchlist
+    refreshBDSList();
+
     // Add filter change listeners
     document.getElementById('sector-filter').addEventListener('change', () => displayStocks(1));
     document.getElementById('sort-filter').addEventListener('change', () => displayStocks(1));
@@ -1989,3 +1992,102 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// BDS Watchlist Logic
+async function refreshBDSList() {
+    const tableBody = document.getElementById('bds-table-body');
+    if (!tableBody) return;
+
+    tableBody.innerHTML = '<tr><td colspan="4" class="loading-cell">Loading BDS list...</td></tr>';
+
+    try {
+        // Try to fetch from backend API first
+        const response = await fetch(`${API_BASE_URL}/admin/blacklist?type=BDS&active=true`);
+
+        let bdsList = [];
+
+        if (response.ok) {
+            const data = await response.json();
+            bdsList = data.blacklists;
+        } else {
+            // Fallback to local list if API fails
+            console.warn('Failed to fetch BDS list from API, using local fallback');
+            bdsList = getLocalBDSList();
+        }
+
+        displayBDSList(bdsList);
+    } catch (error) {
+        console.error('Error fetching BDS list:', error);
+        // Fallback to local list
+        displayBDSList(getLocalBDSList());
+    }
+}
+
+function getLocalBDSList() {
+    // Convert the simple string array to object format for consistency
+    // This is a fallback if the API is unreachable
+    const companies = [
+        { symbol: 'GOOGL', category: 'Tech', reason: 'Project Nimbus, R&D in Israel' },
+        { symbol: 'AMZN', category: 'Tech', reason: 'Cloud services to Israeli military' },
+        { symbol: 'META', category: 'Tech', reason: 'Support for Israeli operations' },
+        { symbol: 'MSFT', category: 'Tech', reason: 'Significant Israeli operations' },
+        { symbol: 'INTC', category: 'Tech', reason: 'Major investments in Israel' },
+        { symbol: 'DELL', category: 'Tech', reason: 'Supplies to Israeli military' },
+        { symbol: 'HPQ', category: 'Tech', reason: 'Systems for movement restrictions' },
+        { symbol: 'ORCL', category: 'Tech', reason: 'Israeli operations' },
+        { symbol: 'IBM', category: 'Tech', reason: 'Israeli operations' },
+        { symbol: 'CSCO', category: 'Tech', reason: 'Israeli operations' },
+        { symbol: 'QCOM', category: 'Tech', reason: 'Israeli operations' },
+        { symbol: 'WIX', category: 'Tech', reason: 'Israeli company' },
+        { symbol: 'BA', category: 'Defense', reason: 'Military equipment supplier' },
+        { symbol: 'LMT', category: 'Defense', reason: 'Military equipment supplier' },
+        { symbol: 'RTX', category: 'Defense', reason: 'Military equipment supplier' },
+        { symbol: 'NOC', category: 'Defense', reason: 'Military equipment supplier' },
+        { symbol: 'GD', category: 'Defense', reason: 'Military equipment supplier' },
+        { symbol: 'PLTR', category: 'Defense', reason: 'Surveillance tech to Israeli military' },
+        { symbol: 'ESLT', category: 'Defense', reason: 'Israeli defense company' },
+        { symbol: 'CAT', category: 'Machinery', reason: 'Bulldozers for demolitions' },
+        { symbol: 'GE', category: 'Machinery', reason: 'Projects in occupied territories' },
+        { symbol: 'SBUX', category: 'Consumer', reason: 'Support for Israeli operations' },
+        { symbol: 'MCD', category: 'Consumer', reason: 'Israeli franchisee supports military' },
+        { symbol: 'PEP', category: 'Consumer', reason: 'Owns SodaStream' },
+        { symbol: 'KO', category: 'Consumer', reason: 'Factory in settlements' },
+        { symbol: 'QSR', category: 'Consumer', reason: 'Israeli franchisee supports military' },
+        { symbol: 'YUM', category: 'Consumer', reason: 'Israeli operations' },
+        { symbol: 'PZZA', category: 'Consumer', reason: 'Israeli operations' },
+        { symbol: 'PG', category: 'Consumer', reason: 'R&D in Tel Aviv' },
+        { symbol: 'UL', category: 'Consumer', reason: 'Israeli operations' },
+        { symbol: 'DIS', category: 'Media', reason: 'Investments and ties to Israel' },
+        { symbol: 'ABNB', category: 'Travel', reason: 'Rentals in settlements' },
+        { symbol: 'BKNG', category: 'Travel', reason: 'Rentals in settlements' },
+        { symbol: 'EXPE', category: 'Travel', reason: 'Rentals in settlements' },
+        { symbol: 'CVX', category: 'Energy', reason: 'Gas extraction in occupied territories' },
+        { symbol: 'TEVA', category: 'Pharma', reason: 'Israeli pharmaceutical company' }
+    ];
+    return companies;
+}
+
+function displayBDSList(list) {
+    const tableBody = document.getElementById('bds-table-body');
+    if (!tableBody) return;
+
+    if (!list || list.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="4" class="text-center">No BDS companies found</td></tr>';
+        return;
+    }
+
+    // Sort by category then symbol
+    list.sort((a, b) => {
+        if (a.category !== b.category) return a.category.localeCompare(b.category);
+        return a.symbol.localeCompare(b.symbol);
+    });
+
+    tableBody.innerHTML = list.map(item => `
+        <tr class="bds-row">
+            <td class="font-medium">${escapeHTML(item.symbol)}</td>
+            <td><span class="badge badge-category">${escapeHTML(item.category || 'Other')}</span></td>
+            <td>${escapeHTML(item.reason || 'BDS Boycott Target')}</td>
+            <td class="text-sm text-gray-500">${escapeHTML(item.source || 'BDS Movement')}</td>
+        </tr>
+    `).join('');
+}
