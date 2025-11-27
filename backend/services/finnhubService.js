@@ -8,10 +8,62 @@ const FINNHUB_BASE_URL = 'https://finnhub.io/api/v1';
 const API_KEY = process.env.FINNHUB_API_KEY;
 
 // BDS and Ethical Blacklists
+// Source: BDS Movement (bdsmovement.net) - Updated 2024/2025
+// Includes consumer boycott targets, divestment targets, and companies with significant Israeli ties
 const BDS_BLACKLIST = [
-    'CAT', 'SBUX', 'MCD', 'PEP', 'KO', 'DIS', 'GOOGL', 'GOOG', 'AMZN',
-    'META', 'MSFT', 'INTC', 'HPQ', 'ORCL', 'IBM', 'CSCO', 'QCOM',
-    'BA', 'LMT', 'RTX', 'NOC', 'GD', 'TXT', 'HII', 'PLTR'
+    // Tech & Cloud Services
+    'GOOGL', 'GOOG',  // Google - Project Nimbus, R&D in Israel
+    'AMZN',           // Amazon - Cloud services to Israeli military
+    'META',           // Meta/Facebook
+    'MSFT',           // Microsoft
+    'INTC',           // Intel - Major investments in Israel
+    'DELL',           // Dell - Supplies to Israeli military
+    'HPQ', 'HPE',     // HP - Systems for movement restrictions
+    'ORCL',           // Oracle
+    'IBM',            // IBM
+    'CSCO',           // Cisco
+    'QCOM',           // Qualcomm
+    'WIX',            // Wix - Israeli company
+
+    // Defense & Aerospace
+    'BA',             // Boeing - Military equipment
+    'LMT',            // Lockheed Martin
+    'RTX',            // Raytheon
+    'NOC',            // Northrop Grumman
+    'GD',             // General Dynamics
+    'TXT',            // Textron
+    'HII',            // Huntington Ingalls
+    'PLTR',           // Palantir - Surveillance tech to Israeli military
+    'ESLT',           // Elbit Systems - Israeli defense
+
+    // Heavy Machinery & Construction
+    'CAT',            // Caterpillar - Bulldozers for demolitions
+    'GE',             // General Electric - Projects in occupied territories
+
+    // Consumer Brands & Food
+    'SBUX',           // Starbucks
+    'MCD',            // McDonald's - Israeli franchisee supports military
+    'PEP',            // PepsiCo - Owns SodaStream
+    'KO',             // Coca-Cola - Factory in settlements
+    'QSR',            // Restaurant Brands (Burger King)
+    'YUM',            // Yum! Brands (Pizza Hut, KFC)
+    'PZZA',           // Papa John's
+    'PG',             // Procter & Gamble - R&D in Tel Aviv
+    'UL',             // Unilever
+
+    // Entertainment & Media
+    'DIS',            // Disney
+
+    // Travel & Hospitality
+    'ABNB',           // Airbnb - Rentals in settlements
+    'BKNG',           // Booking.com - Rentals in settlements
+    'EXPE',           // Expedia - Rentals in settlements
+
+    // Energy
+    'CVX',            // Chevron - Gas extraction in occupied territories
+
+    // Pharmaceuticals
+    'TEVA'            // Teva - Israeli pharmaceutical company
 ];
 
 const ETHICAL_BLACKLIST = [
