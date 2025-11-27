@@ -5,7 +5,7 @@ const API_BASE_URL = 'https://halal-stocks-screener-2.onrender.com/api';
 const BDS_BLACKLIST = [
     'CAT', 'SBUX', 'MCD', 'PEP', 'KO', 'DIS', 'GOOGL', 'GOOG', 'AMZN',
     'META', 'MSFT', 'INTC', 'HPQ', 'ORCL', 'IBM', 'CSCO', 'QCOM',
-    'BA', 'LMT', 'RTX', 'NOC', 'GD', 'TXT', 'HII'
+    'BA', 'LMT', 'RTX', 'NOC', 'GD', 'TXT', 'HII', 'PLTR'
 ];
 
 // Additional companies with ethical concerns
