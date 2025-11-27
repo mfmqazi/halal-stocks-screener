@@ -6,8 +6,10 @@ import stockRoutes from './routes/stocks.js';
 import authRoutes from './routes/auth.js';
 import watchlistRoutes from './routes/watchlist.js';
 import testRoutes from './routes/test.js';
+import adminRoutes from './routes/admin.js';
 import { connectDB } from './config/database.js';
 import { startCronJobs } from './jobs/cronJobs.js';
+import blacklistService from './services/blacklistService.js';
 
 // Load environment variables
 dotenv.config();
@@ -17,7 +19,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB (optional for testing)
-connectDB().catch(err => {
+connectDB().then(async () => {
+    // Initialize blacklist from database or hardcoded values
+    await blacklistService.initializeFromHardcoded();
+    await blacklistService.refreshCache();
+    console.log('✅ Blacklist service initialized');
+}).catch(err => {
     console.log('⚠️  Continuing without MongoDB. User features will be limited.');
 });
 
@@ -47,6 +54,7 @@ app.use('/api/stocks', stockRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/watchlist', watchlistRoutes);
 app.use('/api/test', testRoutes); // Test routes (no database required)
+app.use('/api/admin', adminRoutes); // Admin routes for blacklist management
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

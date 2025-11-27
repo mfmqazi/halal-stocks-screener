@@ -1,5 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
+import blacklistService from './blacklistService.js';
 
 // Load environment variables
 dotenv.config();
@@ -280,9 +281,9 @@ class FinnhubService {
         return prohibited.some(term => industry.includes(term));
     }
 
-    // Check if stock is on blacklist
+    // Check if stock is on blacklist (uses dynamic blacklist service)
     isBlacklisted(symbol) {
-        return BDS_BLACKLIST.includes(symbol) || ETHICAL_BLACKLIST.includes(symbol);
+        return blacklistService.isBlacklisted(symbol);
     }
 
     // Screen stock for Shariah compliance
