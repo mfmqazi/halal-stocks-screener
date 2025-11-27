@@ -11,7 +11,7 @@ const API_KEY = process.env.FINNHUB_API_KEY;
 const BDS_BLACKLIST = [
     'CAT', 'SBUX', 'MCD', 'PEP', 'KO', 'DIS', 'GOOGL', 'GOOG', 'AMZN',
     'META', 'MSFT', 'INTC', 'HPQ', 'ORCL', 'IBM', 'CSCO', 'QCOM',
-    'BA', 'LMT', 'RTX', 'NOC', 'GD', 'TXT', 'HII'
+    'BA', 'LMT', 'RTX', 'NOC', 'GD', 'TXT', 'HII', 'PLTR'
 ];
 
 const ETHICAL_BLACKLIST = [
