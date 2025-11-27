@@ -226,32 +226,84 @@
                 <div class="pagination-info">
                     Page <span id="current-page">1</span> of <span id="total-pages">10</span>
                 </div>
-                Shariah-compliant investment decisions while maintaining strong ethical standards.</p>
-                <p>We go beyond traditional Shariah screening by also filtering out companies that support
-                    oppression, particularly those complicit in the genocide in Palestine. Our ethical framework
-                    ensures your investments align with Islamic values and human rights principles.</p>
-                <p>Our screening methodology is based on AAOIFI standards and incorporates additional ethical
-                    criteria developed in consultation with Islamic scholars and human rights organizations.</p>
-            </div>
-            <div class="about-features">
-                <div class="feature-item">
-                    <div class="feature-icon">✓</div>
-                    <div class="feature-text">Daily updated stock rankings</div>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">✓</div>
-                    <div class="feature-text">Comprehensive Shariah screening</div>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">✓</div>
-                    <div class="feature-text">Ethical investment criteria</div>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">✓</div>
-                    <div class="feature-text">BDS compliance checking</div>
-                </div>
+                <button class="pagination-btn" id="next-page" onclick="changePage(1)">Next</button>
             </div>
         </div>
+    </section>
+
+    <!-- BDS Watchlist Section -->
+    <section id="bds-watchlist" class="bds-section">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">BDS Watchlist</h2>
+                    <p class="section-subtitle">Companies to boycott due to support for Israeli occupation/genocide</p>
+                </div>
+                <div class="filter-controls">
+                    <button class="btn btn-secondary" onclick="refreshBDSList()">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" />
+                            <path d="M21 3v5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        Refresh List
+                    </button>
+                </div>
+            </div>
+
+            <div class="stocks-table-container">
+                <table class="stocks-table bds-table">
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Company</th>
+                            <th>Category</th>
+                            <th>Reason for Boycott</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bds-table-body">
+                        <!-- BDS Stocks will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Halal Stocks</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Halal Stocks is a comprehensive platform dedicated to helping Muslim investors make informed,
+                        Shariah-compliant investment decisions while maintaining strong ethical standards.</p>
+                    <p>We go beyond traditional Shariah screening by also filtering out companies that support
+                        oppression, particularly those complicit in the genocide in Palestine. Our ethical framework
+                        ensures your investments align with Islamic values and human rights principles.</p>
+                    <p>Our screening methodology is based on AAOIFI standards and incorporates additional ethical
+                        criteria developed in consultation with Islamic scholars and human rights organizations.</p>
+                </div>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Daily updated stock rankings</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Comprehensive Shariah screening</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">Ethical investment criteria</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">BDS compliance checking</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

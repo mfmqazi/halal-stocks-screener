@@ -13,83 +13,83 @@ class BlacklistService {
     async initializeFromHardcoded() {
         const bdsCompanies = [
             // Tech & Cloud Services
-            { symbol: 'GOOGL', reason: 'Project Nimbus, R&D in Israel', category: 'tech' },
-            { symbol: 'GOOG', reason: 'Project Nimbus, R&D in Israel', category: 'tech' },
-            { symbol: 'AMZN', reason: 'Cloud services to Israeli military', category: 'tech' },
-            { symbol: 'META', reason: 'Support for Israeli operations', category: 'tech' },
-            { symbol: 'MSFT', reason: 'Significant Israeli operations', category: 'tech' },
-            { symbol: 'INTC', reason: 'Major investments in Israel', category: 'tech' },
-            { symbol: 'DELL', reason: 'Supplies to Israeli military', category: 'tech' },
-            { symbol: 'HPQ', reason: 'Systems for movement restrictions', category: 'tech' },
-            { symbol: 'HPE', reason: 'Systems for movement restrictions', category: 'tech' },
-            { symbol: 'ORCL', reason: 'Israeli operations', category: 'tech' },
-            { symbol: 'IBM', reason: 'Israeli operations', category: 'tech' },
-            { symbol: 'CSCO', reason: 'Israeli operations', category: 'tech' },
-            { symbol: 'QCOM', reason: 'Israeli operations', category: 'tech' },
-            { symbol: 'WIX', reason: 'Israeli company', category: 'tech' },
+            { symbol: 'GOOGL', company: 'Alphabet Inc.', reason: 'Project Nimbus, R&D in Israel', category: 'tech' },
+            { symbol: 'GOOG', company: 'Alphabet Inc.', reason: 'Project Nimbus, R&D in Israel', category: 'tech' },
+            { symbol: 'AMZN', company: 'Amazon.com Inc.', reason: 'Cloud services to Israeli military', category: 'tech' },
+            { symbol: 'META', company: 'Meta Platforms Inc.', reason: 'Support for Israeli operations', category: 'tech' },
+            { symbol: 'MSFT', company: 'Microsoft Corporation', reason: 'Significant Israeli operations', category: 'tech' },
+            { symbol: 'INTC', company: 'Intel Corporation', reason: 'Major investments in Israel', category: 'tech' },
+            { symbol: 'DELL', company: 'Dell Technologies', reason: 'Supplies to Israeli military', category: 'tech' },
+            { symbol: 'HPQ', company: 'HP Inc.', reason: 'Systems for movement restrictions', category: 'tech' },
+            { symbol: 'HPE', company: 'Hewlett Packard Enterprise', reason: 'Systems for movement restrictions', category: 'tech' },
+            { symbol: 'ORCL', company: 'Oracle Corporation', reason: 'Israeli operations', category: 'tech' },
+            { symbol: 'IBM', company: 'IBM', reason: 'Israeli operations', category: 'tech' },
+            { symbol: 'CSCO', company: 'Cisco Systems', reason: 'Israeli operations', category: 'tech' },
+            { symbol: 'QCOM', company: 'Qualcomm Inc.', reason: 'Israeli operations', category: 'tech' },
+            { symbol: 'WIX', company: 'Wix.com Ltd.', reason: 'Israeli company', category: 'tech' },
 
             // Defense & Aerospace
-            { symbol: 'BA', reason: 'Military equipment supplier', category: 'defense' },
-            { symbol: 'LMT', reason: 'Military equipment supplier', category: 'defense' },
-            { symbol: 'RTX', reason: 'Military equipment supplier', category: 'defense' },
-            { symbol: 'NOC', reason: 'Military equipment supplier', category: 'defense' },
-            { symbol: 'GD', reason: 'Military equipment supplier', category: 'defense' },
-            { symbol: 'TXT', reason: 'Military equipment supplier', category: 'defense' },
-            { symbol: 'HII', reason: 'Military equipment supplier', category: 'defense' },
-            { symbol: 'PLTR', reason: 'Surveillance tech to Israeli military', category: 'defense' },
-            { symbol: 'ESLT', reason: 'Israeli defense company', category: 'defense' },
+            { symbol: 'BA', company: 'Boeing Company', reason: 'Military equipment supplier', category: 'defense' },
+            { symbol: 'LMT', company: 'Lockheed Martin', reason: 'Military equipment supplier', category: 'defense' },
+            { symbol: 'RTX', company: 'Raytheon Technologies', reason: 'Military equipment supplier', category: 'defense' },
+            { symbol: 'NOC', company: 'Northrop Grumman', reason: 'Military equipment supplier', category: 'defense' },
+            { symbol: 'GD', company: 'General Dynamics', reason: 'Military equipment supplier', category: 'defense' },
+            { symbol: 'TXT', company: 'Textron Inc.', reason: 'Military equipment supplier', category: 'defense' },
+            { symbol: 'HII', company: 'Huntington Ingalls', reason: 'Military equipment supplier', category: 'defense' },
+            { symbol: 'PLTR', company: 'Palantir Technologies', reason: 'Surveillance tech to Israeli military', category: 'defense' },
+            { symbol: 'ESLT', company: 'Elbit Systems', reason: 'Israeli defense company', category: 'defense' },
 
             // Heavy Machinery & Construction
-            { symbol: 'CAT', reason: 'Bulldozers for demolitions', category: 'machinery' },
-            { symbol: 'GE', reason: 'Projects in occupied territories', category: 'machinery' },
+            { symbol: 'CAT', company: 'Caterpillar Inc.', reason: 'Bulldozers for demolitions', category: 'machinery' },
+            { symbol: 'GE', company: 'General Electric', reason: 'Projects in occupied territories', category: 'machinery' },
 
             // Consumer Brands & Food
-            { symbol: 'SBUX', reason: 'Support for Israeli operations', category: 'consumer' },
-            { symbol: 'MCD', reason: 'Israeli franchisee supports military', category: 'consumer' },
-            { symbol: 'PEP', reason: 'Owns SodaStream', category: 'consumer' },
-            { symbol: 'KO', reason: 'Factory in settlements', category: 'consumer' },
-            { symbol: 'QSR', reason: 'Israeli franchisee supports military', category: 'consumer' },
-            { symbol: 'YUM', reason: 'Israeli operations', category: 'consumer' },
-            { symbol: 'PZZA', reason: 'Israeli operations', category: 'consumer' },
-            { symbol: 'PG', reason: 'R&D in Tel Aviv', category: 'consumer' },
-            { symbol: 'UL', reason: 'Israeli operations', category: 'consumer' },
+            { symbol: 'SBUX', company: 'Starbucks Corporation', reason: 'Support for Israeli operations', category: 'consumer' },
+            { symbol: 'MCD', company: 'McDonald\'s Corporation', reason: 'Israeli franchisee supports military', category: 'consumer' },
+            { symbol: 'PEP', company: 'PepsiCo Inc.', reason: 'Owns SodaStream', category: 'consumer' },
+            { symbol: 'KO', company: 'Coca-Cola Company', reason: 'Factory in settlements', category: 'consumer' },
+            { symbol: 'QSR', company: 'Restaurant Brands Intl', reason: 'Israeli franchisee supports military', category: 'consumer' },
+            { symbol: 'YUM', company: 'Yum! Brands', reason: 'Israeli operations', category: 'consumer' },
+            { symbol: 'PZZA', company: 'Papa John\'s', reason: 'Israeli operations', category: 'consumer' },
+            { symbol: 'PG', company: 'Procter & Gamble', reason: 'R&D in Tel Aviv', category: 'consumer' },
+            { symbol: 'UL', company: 'Unilever PLC', reason: 'Israeli operations', category: 'consumer' },
 
             // Entertainment & Media
-            { symbol: 'DIS', reason: 'Investments and ties to Israel', category: 'media' },
+            { symbol: 'DIS', company: 'Walt Disney Company', reason: 'Investments and ties to Israel', category: 'media' },
 
             // Travel & Hospitality
-            { symbol: 'ABNB', reason: 'Rentals in settlements', category: 'travel' },
-            { symbol: 'BKNG', reason: 'Rentals in settlements', category: 'travel' },
-            { symbol: 'EXPE', reason: 'Rentals in settlements', category: 'travel' },
+            { symbol: 'ABNB', company: 'Airbnb Inc.', reason: 'Rentals in settlements', category: 'travel' },
+            { symbol: 'BKNG', company: 'Booking Holdings', reason: 'Rentals in settlements', category: 'travel' },
+            { symbol: 'EXPE', company: 'Expedia Group', reason: 'Rentals in settlements', category: 'travel' },
 
             // Energy
-            { symbol: 'CVX', reason: 'Gas extraction in occupied territories', category: 'energy' },
+            { symbol: 'CVX', company: 'Chevron Corporation', reason: 'Gas extraction in occupied territories', category: 'energy' },
 
             // Pharmaceuticals
-            { symbol: 'TEVA', reason: 'Israeli pharmaceutical company', category: 'pharma' }
+            { symbol: 'TEVA', company: 'Teva Pharmaceutical', reason: 'Israeli pharmaceutical company', category: 'pharma' }
         ];
 
         const ethicalCompanies = [
-            { symbol: 'MO', reason: 'Tobacco', category: 'consumer' },
-            { symbol: 'PM', reason: 'Tobacco', category: 'consumer' },
-            { symbol: 'BTI', reason: 'Tobacco', category: 'consumer' },
-            { symbol: 'BUD', reason: 'Alcohol', category: 'consumer' },
-            { symbol: 'TAP', reason: 'Alcohol', category: 'consumer' },
-            { symbol: 'STZ', reason: 'Alcohol', category: 'consumer' },
-            { symbol: 'LVS', reason: 'Gambling', category: 'consumer' },
-            { symbol: 'WYNN', reason: 'Gambling', category: 'consumer' },
-            { symbol: 'MGM', reason: 'Gambling', category: 'consumer' },
-            { symbol: 'CZR', reason: 'Gambling', category: 'consumer' },
-            { symbol: 'JPM', reason: 'Conventional Banking', category: 'other' },
-            { symbol: 'BAC', reason: 'Conventional Banking', category: 'other' },
-            { symbol: 'C', reason: 'Conventional Banking', category: 'other' },
-            { symbol: 'WFC', reason: 'Conventional Banking', category: 'other' },
-            { symbol: 'GS', reason: 'Conventional Banking', category: 'other' },
-            { symbol: 'MS', reason: 'Conventional Banking', category: 'other' },
-            { symbol: 'AIG', reason: 'Conventional Insurance', category: 'other' },
-            { symbol: 'PRU', reason: 'Conventional Insurance', category: 'other' },
-            { symbol: 'MET', reason: 'Conventional Insurance', category: 'other' },
-            { symbol: 'AFL', reason: 'Conventional Insurance', category: 'other' }
+            { symbol: 'MO', company: 'Altria Group', reason: 'Tobacco', category: 'consumer' },
+            { symbol: 'PM', company: 'Philip Morris Intl', reason: 'Tobacco', category: 'consumer' },
+            { symbol: 'BTI', company: 'British American Tobacco', reason: 'Tobacco', category: 'consumer' },
+            { symbol: 'BUD', company: 'Anheuser-Busch InBev', reason: 'Alcohol', category: 'consumer' },
+            { symbol: 'TAP', company: 'Molson Coors', reason: 'Alcohol', category: 'consumer' },
+            { symbol: 'STZ', company: 'Constellation Brands', reason: 'Alcohol', category: 'consumer' },
+            { symbol: 'LVS', company: 'Las Vegas Sands', reason: 'Gambling', category: 'consumer' },
+            { symbol: 'WYNN', company: 'Wynn Resorts', reason: 'Gambling', category: 'consumer' },
+            { symbol: 'MGM', company: 'MGM Resorts', reason: 'Gambling', category: 'consumer' },
+            { symbol: 'CZR', company: 'Caesars Entertainment', reason: 'Gambling', category: 'consumer' },
+            { symbol: 'JPM', company: 'JPMorgan Chase', reason: 'Conventional Banking', category: 'other' },
+            { symbol: 'BAC', company: 'Bank of America', reason: 'Conventional Banking', category: 'other' },
+            { symbol: 'C', company: 'Citigroup Inc.', reason: 'Conventional Banking', category: 'other' },
+            { symbol: 'WFC', company: 'Wells Fargo', reason: 'Conventional Banking', category: 'other' },
+            { symbol: 'GS', company: 'Goldman Sachs', reason: 'Conventional Banking', category: 'other' },
+            { symbol: 'MS', company: 'Morgan Stanley', reason: 'Conventional Banking', category: 'other' },
+            { symbol: 'AIG', company: 'AIG', reason: 'Conventional Insurance', category: 'other' },
+            { symbol: 'PRU', company: 'Prudential Financial', reason: 'Conventional Insurance', category: 'other' },
+            { symbol: 'MET', company: 'MetLife Inc.', reason: 'Conventional Insurance', category: 'other' },
+            { symbol: 'AFL', company: 'Aflac Inc.', reason: 'Conventional Insurance', category: 'other' }
         ];
 
         try {

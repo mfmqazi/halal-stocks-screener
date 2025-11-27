@@ -2027,42 +2027,42 @@ function getLocalBDSList() {
     // Convert the simple string array to object format for consistency
     // This is a fallback if the API is unreachable
     const companies = [
-        { symbol: 'GOOGL', category: 'Tech', reason: 'Project Nimbus, R&D in Israel' },
-        { symbol: 'AMZN', category: 'Tech', reason: 'Cloud services to Israeli military' },
-        { symbol: 'META', category: 'Tech', reason: 'Support for Israeli operations' },
-        { symbol: 'MSFT', category: 'Tech', reason: 'Significant Israeli operations' },
-        { symbol: 'INTC', category: 'Tech', reason: 'Major investments in Israel' },
-        { symbol: 'DELL', category: 'Tech', reason: 'Supplies to Israeli military' },
-        { symbol: 'HPQ', category: 'Tech', reason: 'Systems for movement restrictions' },
-        { symbol: 'ORCL', category: 'Tech', reason: 'Israeli operations' },
-        { symbol: 'IBM', category: 'Tech', reason: 'Israeli operations' },
-        { symbol: 'CSCO', category: 'Tech', reason: 'Israeli operations' },
-        { symbol: 'QCOM', category: 'Tech', reason: 'Israeli operations' },
-        { symbol: 'WIX', category: 'Tech', reason: 'Israeli company' },
-        { symbol: 'BA', category: 'Defense', reason: 'Military equipment supplier' },
-        { symbol: 'LMT', category: 'Defense', reason: 'Military equipment supplier' },
-        { symbol: 'RTX', category: 'Defense', reason: 'Military equipment supplier' },
-        { symbol: 'NOC', category: 'Defense', reason: 'Military equipment supplier' },
-        { symbol: 'GD', category: 'Defense', reason: 'Military equipment supplier' },
-        { symbol: 'PLTR', category: 'Defense', reason: 'Surveillance tech to Israeli military' },
-        { symbol: 'ESLT', category: 'Defense', reason: 'Israeli defense company' },
-        { symbol: 'CAT', category: 'Machinery', reason: 'Bulldozers for demolitions' },
-        { symbol: 'GE', category: 'Machinery', reason: 'Projects in occupied territories' },
-        { symbol: 'SBUX', category: 'Consumer', reason: 'Support for Israeli operations' },
-        { symbol: 'MCD', category: 'Consumer', reason: 'Israeli franchisee supports military' },
-        { symbol: 'PEP', category: 'Consumer', reason: 'Owns SodaStream' },
-        { symbol: 'KO', category: 'Consumer', reason: 'Factory in settlements' },
-        { symbol: 'QSR', category: 'Consumer', reason: 'Israeli franchisee supports military' },
-        { symbol: 'YUM', category: 'Consumer', reason: 'Israeli operations' },
-        { symbol: 'PZZA', category: 'Consumer', reason: 'Israeli operations' },
-        { symbol: 'PG', category: 'Consumer', reason: 'R&D in Tel Aviv' },
-        { symbol: 'UL', category: 'Consumer', reason: 'Israeli operations' },
-        { symbol: 'DIS', category: 'Media', reason: 'Investments and ties to Israel' },
-        { symbol: 'ABNB', category: 'Travel', reason: 'Rentals in settlements' },
-        { symbol: 'BKNG', category: 'Travel', reason: 'Rentals in settlements' },
-        { symbol: 'EXPE', category: 'Travel', reason: 'Rentals in settlements' },
-        { symbol: 'CVX', category: 'Energy', reason: 'Gas extraction in occupied territories' },
-        { symbol: 'TEVA', category: 'Pharma', reason: 'Israeli pharmaceutical company' }
+        { symbol: 'GOOGL', company: 'Alphabet Inc.', category: 'Tech', reason: 'Project Nimbus, R&D in Israel' },
+        { symbol: 'AMZN', company: 'Amazon.com Inc.', category: 'Tech', reason: 'Cloud services to Israeli military' },
+        { symbol: 'META', company: 'Meta Platforms Inc.', category: 'Tech', reason: 'Support for Israeli operations' },
+        { symbol: 'MSFT', company: 'Microsoft Corporation', category: 'Tech', reason: 'Significant Israeli operations' },
+        { symbol: 'INTC', company: 'Intel Corporation', category: 'Tech', reason: 'Major investments in Israel' },
+        { symbol: 'DELL', company: 'Dell Technologies', category: 'Tech', reason: 'Supplies to Israeli military' },
+        { symbol: 'HPQ', company: 'HP Inc.', category: 'Tech', reason: 'Systems for movement restrictions' },
+        { symbol: 'ORCL', company: 'Oracle Corporation', category: 'Tech', reason: 'Israeli operations' },
+        { symbol: 'IBM', company: 'IBM', category: 'Tech', reason: 'Israeli operations' },
+        { symbol: 'CSCO', company: 'Cisco Systems', category: 'Tech', reason: 'Israeli operations' },
+        { symbol: 'QCOM', company: 'Qualcomm Inc.', category: 'Tech', reason: 'Israeli operations' },
+        { symbol: 'WIX', company: 'Wix.com Ltd.', category: 'Tech', reason: 'Israeli company' },
+        { symbol: 'BA', company: 'Boeing Company', category: 'Defense', reason: 'Military equipment supplier' },
+        { symbol: 'LMT', company: 'Lockheed Martin', category: 'Defense', reason: 'Military equipment supplier' },
+        { symbol: 'RTX', company: 'Raytheon Technologies', category: 'Defense', reason: 'Military equipment supplier' },
+        { symbol: 'NOC', company: 'Northrop Grumman', category: 'Defense', reason: 'Military equipment supplier' },
+        { symbol: 'GD', company: 'General Dynamics', category: 'Defense', reason: 'Military equipment supplier' },
+        { symbol: 'PLTR', company: 'Palantir Technologies', category: 'Defense', reason: 'Surveillance tech to Israeli military' },
+        { symbol: 'ESLT', company: 'Elbit Systems', category: 'Defense', reason: 'Israeli defense company' },
+        { symbol: 'CAT', company: 'Caterpillar Inc.', category: 'Machinery', reason: 'Bulldozers for demolitions' },
+        { symbol: 'GE', company: 'General Electric', category: 'Machinery', reason: 'Projects in occupied territories' },
+        { symbol: 'SBUX', company: 'Starbucks Corporation', category: 'Consumer', reason: 'Support for Israeli operations' },
+        { symbol: 'MCD', company: 'McDonald\'s Corporation', category: 'Consumer', reason: 'Israeli franchisee supports military' },
+        { symbol: 'PEP', company: 'PepsiCo Inc.', category: 'Consumer', reason: 'Owns SodaStream' },
+        { symbol: 'KO', company: 'Coca-Cola Company', category: 'Consumer', reason: 'Factory in settlements' },
+        { symbol: 'QSR', company: 'Restaurant Brands Intl', category: 'Consumer', reason: 'Israeli franchisee supports military' },
+        { symbol: 'YUM', company: 'Yum! Brands', category: 'Consumer', reason: 'Israeli operations' },
+        { symbol: 'PZZA', company: 'Papa John\'s', category: 'Consumer', reason: 'Israeli operations' },
+        { symbol: 'PG', company: 'Procter & Gamble', category: 'Consumer', reason: 'R&D in Tel Aviv' },
+        { symbol: 'UL', company: 'Unilever PLC', category: 'Consumer', reason: 'Israeli operations' },
+        { symbol: 'DIS', company: 'Walt Disney Company', category: 'Media', reason: 'Investments and ties to Israel' },
+        { symbol: 'ABNB', company: 'Airbnb Inc.', category: 'Travel', reason: 'Rentals in settlements' },
+        { symbol: 'BKNG', company: 'Booking Holdings', category: 'Travel', reason: 'Rentals in settlements' },
+        { symbol: 'EXPE', company: 'Expedia Group', category: 'Travel', reason: 'Rentals in settlements' },
+        { symbol: 'CVX', company: 'Chevron Corporation', category: 'Energy', reason: 'Gas extraction in occupied territories' },
+        { symbol: 'TEVA', company: 'Teva Pharmaceutical', category: 'Pharma', reason: 'Israeli pharmaceutical company' }
     ];
     return companies;
 }
@@ -2072,7 +2072,7 @@ function displayBDSList(list) {
     if (!tableBody) return;
 
     if (!list || list.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="4" class="text-center">No BDS companies found</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="5" class="text-center">No BDS companies found</td></tr>';
         return;
     }
 
@@ -2085,6 +2085,7 @@ function displayBDSList(list) {
     tableBody.innerHTML = list.map(item => `
         <tr class="bds-row">
             <td class="font-medium">${escapeHTML(item.symbol)}</td>
+            <td>${escapeHTML(item.company || item.symbol)}</td>
             <td><span class="badge badge-category">${escapeHTML(item.category || 'Other')}</span></td>
             <td>${escapeHTML(item.reason || 'BDS Boycott Target')}</td>
             <td class="text-sm text-gray-500">${escapeHTML(item.source || 'BDS Movement')}</td>

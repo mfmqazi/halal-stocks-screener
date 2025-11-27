@@ -11,6 +11,10 @@ const blacklistSchema = new mongoose.Schema({
         required: true,
         uppercase: true
     },
+    company: {
+        type: String,
+        default: ''
+    },
     reason: {
         type: String,
         required: true
